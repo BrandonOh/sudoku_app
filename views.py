@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Create your views here.
@@ -8,7 +7,6 @@ def sudoku_solver(request):
     return render(request, 'sudoku_app/sudoku_solver.html')
 
 # HTMX endpoint for solving sudoku puzzle
-@csrf_exempt
 def solve_sudoku(request):
     if request.method == 'POST':
         try: 
@@ -31,7 +29,6 @@ def solve_sudoku(request):
     return JsonResponse({'success': False, 'error': 'Invalid request'})
 
 # HTMX endpoint to clear the grid
-@csrf_exempt
 def clear_sudoku(request):
     if request.method == 'POST':
         empty_grid = [['' for _ in range(9)] for _ in range(9)]
